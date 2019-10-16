@@ -1,0 +1,12 @@
+{
+  "name": "product-endpoints",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:ningo-agilityio/product-endpoints.git",
+  "author": "Ni Ngo <ni.ngo@asnet.com.vn>",
+  "license": "MIT",
+  "dependencies": {
+    "apollo-server": "^2.9.6",
+    "graphql": "^14.5.8"
+  }
+}
