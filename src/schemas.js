@@ -4,18 +4,111 @@ const { gql } = require('apollo-server');
 // that together define the "shape" of queries that are executed against
 // your data.
 const typeDefs = gql`
-  # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
-  # This "Book" type defines the queryable fields for every book in our data source.
-  type Book {
-    title: String
-    author: String
+  # SCHEMAS
+  type Product {
+    id: ID
+    name: String
+    quantity: Int
+    price: Float
+    thumbnail: String
+    description: String
+    category: Category
   }
 
-  # The "Query" type is special: it lists all of the available queries that
-  # clients can execute, along with the return type for each. In this
-  # case, the "books" query returns an array of zero or more Books (defined above).
+  type Category {
+    id: ID
+    name: String
+    description: String
+  }
+
+  type Cart {
+    id: ID
+    product: Product
+    quantity: Int
+    customer: Customer
+  }
+
+  type Customer {
+    id: ID
+    username: String
+    first_name: String
+    last_name: String
+    avatar_url: String
+    gender: Boolean # true: male, false: female
+  }
+
+  # INPUT PARAM
+  input productInput {
+    name: String
+    quantity: Int
+    price: Float
+    thumbnail: String
+    description: String
+    category: Int
+  }
+
+  input customerInput {
+    username: String
+    first_name: String
+    last_name: String
+    avatar_url: String
+    gender: Boolean # true: male, false: female
+  }
+
+  input cartInput {
+    product: Int
+    quantity: Int
+    customer: Int
+  }
+
+  # RESPONSES
+  interface MutationResponse {
+    code: String!
+    success: Boolean!
+    message: String!
+  }
+
+  type ProductMutationResponse implements MutationResponse {
+    code: String!
+    success: Boolean!
+    message: String!
+    product: Product
+  }
+
+  type CustomerMutationResponse implements MutationResponse {
+    code: String!
+    success: Boolean!
+    message: String!
+    customer: Customer
+  }
+
+  type CartMutationResponse implements MutationResponse {
+    code: String!
+    success: Boolean!
+    message: String!
+    cart: Cart
+  }
+
+  # QUERIES
   type Query {
-    books: [Book]
+    getProducts: [Product]
+    getCategories: [Category]
+    getProduct(id: String!): Product
+    getCustomer(id: String!): Customer
+    getCart(id: String!): Cart
+  }
+
+  # MUTATIONS
+  type Mutation {
+    addProduct(input: productInput!): ProductMutationResponse
+    updateProduct(id: String!, input: productInput!): ProductMutationResponse
+    deleteProduct(id: String!): ProductMutationResponse
+
+    addCustomer(input: customerInput): CustomerMutationResponse
+    updateCustomer(id: String!, input: customerInput): CustomerMutationResponse
+
+    addCart(input: cartInput): CartMutationResponse
+    updateCart(id: String!, input: cartInput): CartMutationResponse
   }
 `;
 
