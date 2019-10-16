@@ -4,6 +4,26 @@ const { gql } = require('apollo-server');
 // that together define the "shape" of queries that are executed against
 // your data.
 const typeDefs = gql`
+  # ENUMS
+  enum Colors {
+    White
+    Black
+    Pink
+    Red
+    Yellow
+    Blue
+    Green
+  }
+
+  enum Sizes {
+    XS
+    S
+    M
+    L
+    XL
+    XXL
+  }
+
   # SCHEMAS
   type Product {
     id: ID
@@ -13,6 +33,8 @@ const typeDefs = gql`
     thumbnail: String
     description: String
     category: Category
+    size: Sizes
+    color: Colors
   }
 
   type Category {
@@ -45,6 +67,8 @@ const typeDefs = gql`
     thumbnail: String
     description: String
     category: Int
+    size: String
+    color: String
   }
 
   input customerInput {
