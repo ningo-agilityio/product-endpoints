@@ -8,13 +8,13 @@ const resolvers = {
     getCategories: () => JSON.parse(localStorage.getItem('categories')),
 
     getProduct(parent, args, context, info) {
-      return find(JSON.parse(localStorage.getItem('products')), { id: args.id });
+      return _.find(JSON.parse(localStorage.getItem('products')), i =>  i.id === args.id);
     },
     getCustomer(parent, args, context, info) {
-      return find(JSON.parse(localStorage.getItem('customers')), { id: args.id });
+      return _.find(JSON.parse(localStorage.getItem('customers')), i =>  i.id === args.id);
     },
     getCart(parent, args, context, info) {
-      return find(JSON.parse(localStorage.getItem('carts')), { id: args.id });
+      return _.find(JSON.parse(localStorage.getItem('carts')), i =>  i.id === args.id);
     },
   },
 
