@@ -6,7 +6,7 @@
   "author": "Ni Ngo <ni.ngo@asnet.com.vn>",
   "license": "MIT",
   "dependencies": {
-    "apollo-server": "^2.9.6",
+    "apollo-server": "^2.14.2",
     "graphql": "^14.5.8",
     "lodash": "^4.17.15",
     "node-localstorage": "^1.3.1"
